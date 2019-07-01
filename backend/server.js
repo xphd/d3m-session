@@ -19,7 +19,8 @@ const datasetNames = fs.readdirSync(datasetsPath);
 // console.log(datasetsPath);
 
 const Session = require("./Session/Session.js");
-const addHerald = require("./addHerald.js");
+const createHerald = require("./crudHerald/createHerald.js");
+const deleteHerald = require("./crudHerald/deleteHerald.js");
 
 const session = new Session();
 
@@ -34,13 +35,33 @@ serverSocket.on("connection", socket => {
     console.log("getAllDatasetNamesResponse");
   });
 
-  socket.on("getDataset", datasetSelected => {
+  socket.on("createHerald", datasetSelected => {
     console.log(datasetSelected);
 
     // herald is a wrapper for dataset and problem
     // once the dataset path is selected,
     // both dataset and problem are set.
-    addHerald(session, datasetsPath, datasetSelected);
+    createHerald(session, datasetsPath, datasetSelected);
   });
-  // socket.emit();
+
+  socket.on("getAllHeraldsRequest", () => {
+    const heralds = session.getHeralds();
+    let heraldsList = [];
+    if (heralds) {
+      heralds.forEach(herald => {
+        let item = {};
+        item.id = herald.getId();
+        item.dataset = herald.getDataset().getDatasetPath();
+        item.problem = herald.getProblem().getProblemPath();
+        heraldsList.push(item);
+      });
+    }
+    // console.log(heraldsList);
+    console.log("getAllHeraldsRequest");
+    socket.emit("getAllHeraldsResponse", heraldsList);
+  });
+
+  socket.on("deleteHerald", id => {
+    deleteHerald(session, id);
+  });
 });

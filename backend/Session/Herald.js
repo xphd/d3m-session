@@ -1,6 +1,7 @@
 class Herald {
-  constructor() {
+  constructor(id) {
     // to be private, getters and setters
+    this.id = id; // new
     this.dataset = null;
     this.problem = null;
     this.client = null;
@@ -22,6 +23,10 @@ class Herald {
     //   "static/local_testing_data/196_autoMpg/196_autoMpg_solution/model_B.csv",
     //   "static/local_testing_data/196_autoMpg/196_autoMpg_solution/model_C.csv"
     // ]; // []
+  }
+
+  getId() {
+    return this.id;
   }
 
   // getters

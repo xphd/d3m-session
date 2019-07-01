@@ -10,8 +10,14 @@ class Session {
     // * state objects
     // this.dataset = null;
     // this.problem = null;
+
+    // current herald
     this.herald = null;
+
+    // this is new.
     this.heralds = null; // new Map()
+    this.heraldId = 0; // alse as counter for heralds
+
     // are we running in development mode (without a ta2)
     // this.devMode = false;
 
@@ -39,6 +45,10 @@ class Session {
 
   getHerald() {
     return this.herald;
+  }
+
+  getHeralds() {
+    return this.heralds;
   }
 
   // setters
