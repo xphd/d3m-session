@@ -1,20 +1,23 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
+    <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <SessionManage />
+    <!-- <SessionManage /> -->
+    <WorkFlow />
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import SessionManage from "./components/SessionManage.vue";
+// import SessionManage from "./components/SessionManage.vue";
+import WorkFlow from "./components/WorkFlow.vue";
 
 export default {
   name: "app",
   components: {
     // HelloWorld
-    SessionManage
+    // SessionManage
+    WorkFlow
   }
 };
 </script>
