@@ -4,14 +4,17 @@
 
     <input v-model="problemSelected" />
     <p>Pre-existed Problem</p>
-    <li v-for="name in datasetNames" :key="name">
-      <input type="radio" :value="name" v-model="datasetSelected" />
+    <button @click="getPreExistedProblem()">Get Pre-existed Problem</button>
+    <br />
+    <li v-for="name in preExistedProblemPath" :key="name">
+      <input type="radio" :value="name" v-model="problemSelected" />
       {{name}}
     </li>
+    <!-- <input type="radio" :value="preExistedProblemPath" v-model="problemSelected" /> -->
 
     <p>Generated Problem</p>
-    <li v-for="name in datasetNames" :key="name">
-      <input type="radio" :value="name" v-model="datasetSelected" />
+    <li v-for="name in generatedProblemPath" :key="name">
+      <input type="radio" :value="name" v-model="problemSelected" />
       {{name}}
     </li>
   </div>
@@ -21,7 +24,22 @@
 export default {
   name: "task-1",
   data() {
-    return {};
+    return {
+      preExistedProblemPath: [],
+      generatedProblemPath: ["gp1", "gp2"],
+      problemSelected: null
+    };
+  },
+  methods: {
+    getPreExistedProblem() {
+      this.$socket.emit("getPreExistedProblemRequest");
+    }
+  },
+  sockets: {
+    getPreExistedProblemResponse(preExistedProblemPath) {
+      this.preExistedProblemPath.push(preExistedProblemPath);
+      this.problemSelected = preExistedProblemPath;
+    }
   }
 };
 </script>

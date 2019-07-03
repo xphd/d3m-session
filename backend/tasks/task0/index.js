@@ -1,6 +1,6 @@
 // task 0
 
-const appRootPath = require("app-root");
+const appRootPath = require("app-root-path");
 
 const Herald = require(appRootPath + "/Session/Herald.js");
 
@@ -15,6 +15,7 @@ function task0_set(session, socket) {
   });
 
   socket.on("setDatasetRequest", datasetSelected => {
+    console.log("task0: setDatasetRequest");
     const herald = new Herald();
     session.setHerald(herald);
     setDataset(session, socket, datasetSelected);

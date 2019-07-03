@@ -5,6 +5,7 @@ class Dataset {
   constructor(datasetPath) {
     this.datasetPath = datasetPath;
     this.datasetSchema = require(datasetPath + "/datasetDoc.json");
+    console.log(this.datasetSchema.about.datasetID);
     this.learningDataFile = datasetPath + "/tables/learningData.csv";
     // now get schema from datasetPath
     // let files = fs

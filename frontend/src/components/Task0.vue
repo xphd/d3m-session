@@ -35,7 +35,8 @@ export default {
   },
   methods: {
     setDataset() {
-      this.$socket.emit("setDatasetRequest", datasetSelected);
+      console.log("setDatasetRequest sent");
+      this.$socket.emit("setDatasetRequest", this.datasetSelected);
     },
     getAllDatasetNames() {
       this.$socket.emit("getAllDatasetNamesRequest");
@@ -46,7 +47,7 @@ export default {
       if (datasetNames) {
         this.datasetNames = datasetNames;
 
-        this.datasetSelected = datasetNames[0];
+        this.datasetSelected = datasetNames[1];
       }
     }
   }
