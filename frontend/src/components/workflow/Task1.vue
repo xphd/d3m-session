@@ -5,9 +5,6 @@
     <input v-model="problemPathSelected" />
 
     <p>Pre-existed Problem</p>
-    <!-- <button @click="getPreExistedProblem()">Get Pre-existed Problem</button> -->
-    <br />
-
     <li v-for="(path,index) in problemPaths" :key="index">
       <input type="radio" :value="path" v-model="problemPathSelected" />
       {{path2name(path)}}
@@ -17,11 +14,8 @@
     {{getNameFromPath(preExistedProblemPath)}}-->
     <!-- <input type="radio" :value="preExistedProblemPath" v-model="problemPathSelected" /> -->
 
-    <p>Generated Problem</p>
-    <!-- <li v-for="name in generatedProblemPath" :key="name">
-      <input type="radio" :value="name" v-model="problemPathSelected" />
-      {{name}}
-    </li>-->
+    <button>Generated Problem</button>
+    <button>getGeneratedProblemPaths</button>
   </div>
 </template>
 
@@ -41,7 +35,7 @@ export default {
       this.$socket.emit("getPreExistedProblemPathRequest");
     },
     getGeneratedProblemPaths() {
-      // this.$socket.emit("getGeneratedProblemPathsRequest")
+      this.$socket.emit("getGeneratedProblemPathsRequest");
     },
     setProblem() {
       this.$socket.emit("setProblem", problemPathSelected);
