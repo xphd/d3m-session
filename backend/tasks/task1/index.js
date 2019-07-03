@@ -13,7 +13,9 @@ function task1_set(session, socket) {
     socket.emit("getPreExistedProblemPathResponse", preExistedProblemPath);
   });
 
-  socket.on("getPreExistedProblemPathRequest", () => {});
+  socket.on("generatedProblemsRequest", () => {});
+
+  socket.on("getGeneratedProblemsRequest", () => {});
 
   socket.on("setProblem", problemPathSelected => {
     setProblem(session, socket, problemPathSelected);

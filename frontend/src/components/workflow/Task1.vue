@@ -14,8 +14,10 @@
     {{getNameFromPath(preExistedProblemPath)}}-->
     <!-- <input type="radio" :value="preExistedProblemPath" v-model="problemPathSelected" /> -->
 
-    <button>Generated Problem</button>
-    <button>getGeneratedProblemPaths</button>
+    <button @click="generatedProblems()">Generated Problem</button>
+    <button @click="getGeneratedProblems()">getGeneratedProblems</button>
+
+    <button @click="setProblem()">Confirm Problem and Create Herald</button>
   </div>
 </template>
 
@@ -31,6 +33,15 @@ export default {
     };
   },
   methods: {
+    setProblem() {
+      this.$socket.emit("setProblemRequest");
+    },
+    getGeneratedProblems() {
+      this.$socket.emit("getGeneratedProblemsRequest");
+    },
+    generatedProblems() {
+      this.$socket.emit("generatedProblemsRequest");
+    },
     getPreExistedProblemPath() {
       this.$socket.emit("getPreExistedProblemPathRequest");
     },
@@ -53,6 +64,7 @@ export default {
       let len = this.problemPaths.length;
       if (len < 1) {
         this.problemPaths.push(preExistedProblemPath);
+        this.problemPathSelected = preExistedProblemPath;
       }
     }
   }

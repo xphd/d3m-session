@@ -14,7 +14,8 @@
       {{name}}
     </li>
     <h3>Augment Data</h3>
-    <button @click="setDataset()" :disabled="confirmed">Confirm</button>
+
+    <button @click="setDataset()" :disabled="confirmed">Confirm Dataset</button>
     <button @click="confirmed=false" :disabled="!confirmed">Reset</button>
   </div>
 </template>
