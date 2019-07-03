@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>Task 0: Select (Augmented) Dataset</h1>
-
     <input v-model="datasetSelected" />
 
     <h2>Select from Seed Datasets</h2>
@@ -9,14 +8,14 @@
       <input type="radio" :value="name" v-model="datasetSelected" />
       {{name}}
     </li>
-
     <h2>Or Select from Augmented Datasets</h2>
     <li v-for="name in datasetAugNames" :key="name">
       <input type="radio" :value="name" v-model="datasetSelected" />
       {{name}}
     </li>
-
-    <button @click="setDataset()">Confirm</button>
+    <h3>Augment Data</h3>
+    <button @click="setDataset()" :disabled="confirmed">Confirm</button>
+    <button @click="confirmed=false" :disabled="!confirmed">Reset</button>
   </div>
 </template>
 
@@ -27,7 +26,8 @@ export default {
     return {
       datasetNames: null,
       datasetAugNames: ["augData_1", "augData_2"],
-      datasetSelected: null
+      datasetSelected: null,
+      confirmed: false
     };
   },
   mounted() {
@@ -35,8 +35,9 @@ export default {
   },
   methods: {
     setDataset() {
-      console.log("setDatasetRequest sent");
+      // console.log("setDatasetRequest sent");
       this.$socket.emit("setDatasetRequest", this.datasetSelected);
+      this.confirmed = true;
     },
     getAllDatasetNames() {
       this.$socket.emit("getAllDatasetNamesRequest");
@@ -46,8 +47,7 @@ export default {
     getAllDatasetNamesResponse(datasetNames) {
       if (datasetNames) {
         this.datasetNames = datasetNames;
-
-        this.datasetSelected = datasetNames[1];
+        this.datasetSelected = datasetNames[0];
       }
     }
   }

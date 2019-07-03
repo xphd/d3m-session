@@ -1,22 +1,25 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <!-- <SessionManage /> -->
-    <WorkFlow />
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <HeraldsOverview />
+        </div>
+        <div class="col-8">
+          <WorkFlow />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import SessionManage from "./components/SessionManage.vue";
-import WorkFlow from "./components/WorkFlow.vue";
-
+import HeraldsOverview from "./components/heraldsoverview/HeraldsOverview.vue";
+import WorkFlow from "./components/workflow/WorkFlow.vue";
 export default {
   name: "app",
   components: {
-    // HelloWorld
-    // SessionManage
+    HeraldsOverview,
     WorkFlow
   }
 };

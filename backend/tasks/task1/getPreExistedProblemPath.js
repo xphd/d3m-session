@@ -1,4 +1,4 @@
-function getPreExistedProblem(session) {
+function getPreExistedProblemPath(session) {
   let herald = session.getHerald();
   let dataset = herald.getDataset();
   let datasetPath = dataset.getDatasetPath();
@@ -14,4 +14,4 @@ function getPreExistedProblem(session) {
   return preExistedProblemPath;
 }
 
-module.exports = getPreExistedProblem;
+module.exports = getPreExistedProblemPath;

@@ -2,7 +2,9 @@
   <div>
     <h1>Work Flow</h1>
     <Task0 />
+    <hr />
     <Task1 />
+    <hr />
     <Task2 />
   </div>
 </template>

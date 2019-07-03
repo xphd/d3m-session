@@ -1,11 +1,7 @@
 const fs = require("fs");
-
-const appRootPath = require("app-root-path");
-const datasetsPath = appRootPath + "/static/local_testing_data/";
-
-function getAllDatasetNames() {
-  let datasetNames = fs.readdirSync(datasetsPath);
-  return datasetNames;
+function getAllDatasetNames(datasetsPath) {
+  // console.log("task0: getAllDatasetNames");
+  let allDatasetNames = fs.readdirSync(datasetsPath);
+  return allDatasetNames;
 }
-
 module.exports = getAllDatasetNames;

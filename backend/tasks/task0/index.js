@@ -1,7 +1,5 @@
 // task 0
-
 const appRootPath = require("app-root-path");
-
 const Herald = require(appRootPath + "/Session/Herald.js");
 
 const getAllDatasetNames = require("./getAllDatasetNames.js");
@@ -9,9 +7,9 @@ const setDataset = require("./setDataset.js");
 
 function task0_set(session, socket) {
   socket.on("getAllDatasetNamesRequest", () => {
-    console.log("task0: getAllDatasetNames");
-    let datasetNames = getAllDatasetNames();
-    socket.emit("getAllDatasetNamesResponse", datasetNames);
+    const allDatasetsPath = appRootPath + "/static/local_testing_data/";
+    let allDatasetNames = getAllDatasetNames(allDatasetsPath);
+    socket.emit("getAllDatasetNamesResponse", allDatasetNames);
   });
 
   socket.on("setDatasetRequest", datasetSelected => {
@@ -19,6 +17,7 @@ function task0_set(session, socket) {
     const herald = new Herald();
     session.setHerald(herald);
     setDataset(session, socket, datasetSelected);
+    socket.emit("setDatasetResponse");
   });
 }
 
