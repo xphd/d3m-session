@@ -21,7 +21,7 @@ const session = new Session();
 session.setHeralds(new Map());
 
 const tasks = require("./tasks");
-const crudHerald = require("./curdHerald");
+const crudHerald = require("./crudHerald");
 
 serverSocket.on("connection", socket => {
   console.log("Server: connected!");

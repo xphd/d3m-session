@@ -2,7 +2,7 @@
   <div>
     <h1>Heralds Overview</h1>
     <li v-for="name in heralds" :key="name">
-      <input type="radio" :value="name" v-model="heraldSelected" />
+      <input type="radio" :value="name" v-model="heraldIdSelected" />
       {{name}}
     </li>
     <button @click="deleteHerald()">Delete herald</button>
@@ -16,26 +16,42 @@ export default {
   name: "heralds-overview",
   data() {
     return {
-      heralds: [],
+      heralds: [], // for now, they are nothing but ids of heralds
       heraldIdSelected: null
     };
   },
+  mounted() {
+    this.$socket.emit("getAllHeraldsRequest"); // for dev purpose
+  },
   methods: {
     getAllHeralds() {
-      socket.emit("getAllHeraldsRequest");
+      this.$socket.emit("getAllHeraldsRequest");
     },
     deleteHerald() {
-      socket.emit("deleteHeraldRequest", heraldIdSelected);
+      this.$socket.emit("deleteHeraldRequest", this.heraldIdSelected);
     },
     readHerald() {}
   },
   sockets: {
-    setProblemRequest() {
+    getAllHeraldsResponse(heraldIds) {
+      this.heralds = heraldIds;
+    },
+    setProblemResponse() {
       this.$socket.emit("createHeraldRequest");
     },
     createHeraldResponse(heraldId) {
       this.heralds.push(heraldId);
       this.heraldIdSelected = heraldId;
+    },
+    deleteHeraldResponse(heraldId) {
+      console.log("Id of heralds to be deleted is:", heraldId);
+      for (let index = 0; index < this.heralds.length; index++) {
+        let item = this.heralds[index];
+        if (item == heraldId) {
+          this.heralds.splice(index, 1);
+          break;
+        }
+      }
     }
   }
 };
