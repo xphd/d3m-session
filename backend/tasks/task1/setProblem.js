@@ -1,14 +1,12 @@
 const appRootPath = require("app-root-path");
-
 const Problem = require(appRootPath + "/Session/Problem.js");
 
-const datasetsPath = appRootPath + "/static/local_testing_data/";
+// const datasetsPath = appRootPath + "/static/local_testing_data/";
 
-function setproblem(session, socket, problemSelected) {
-  let problemPath = datasetsPath + problemSelected;
-  let problem = new Problem(problemPath);
-  let herald = session.getHerald();
-  herald.setproblem(problem);
+function setProblem(session, problemPathSelected) {
+  // let problemPath = datasetsPath + problemPathSelected;
+  let problem = new Problem(problemPathSelected);
+  session.setProblem(problem);
 }
 
-module.exports = setproblem;
+module.exports = setProblem;

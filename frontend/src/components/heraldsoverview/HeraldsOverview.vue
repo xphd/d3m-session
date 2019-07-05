@@ -5,7 +5,9 @@
       <input type="radio" :value="name" v-model="heraldSelected" />
       {{name}}
     </li>
-    <button @click="viewHerald()">ViewHerald()</button>
+    <button @click="deleteHerald()">Delete herald</button>
+    <button @click="readHerald()">Read Herald</button>
+    <!-- <button @click="viewHerald()">ViewHerald()</button> -->
   </div>
 </template>
 
@@ -14,8 +16,27 @@ export default {
   name: "heralds-overview",
   data() {
     return {
-      heralds: ["herald0", "herald1"]
+      heralds: [],
+      heraldIdSelected: null
     };
+  },
+  methods: {
+    getAllHeralds() {
+      socket.emit("getAllHeraldsRequest");
+    },
+    deleteHerald() {
+      socket.emit("deleteHeraldRequest", heraldIdSelected);
+    },
+    readHerald() {}
+  },
+  sockets: {
+    setProblemRequest() {
+      this.$socket.emit("createHeraldRequest");
+    },
+    createHeraldResponse(heraldId) {
+      this.heralds.push(heraldId);
+      this.heraldIdSelected = heraldId;
+    }
   }
 };
 </script>

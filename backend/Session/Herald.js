@@ -1,6 +1,7 @@
 class Herald {
   constructor(id) {
     // to be private, getters and setters
+    console.log("New herald created", id);
     this.id = id; // new
     this.dataset = null;
     this.problem = null;
@@ -51,6 +52,9 @@ class Herald {
   }
 
   // setters
+  // setId(id) {
+  //   this.id = id;
+  // }
   setDataset(dataset) {
     this.dataset = dataset;
   }

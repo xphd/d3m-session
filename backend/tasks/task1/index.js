@@ -4,6 +4,8 @@ const getPreExistedProblemPath = require("./getPreExistedProblemPath");
 
 const setProblem = require("./setProblem");
 
+// const createHerald = require(appRootPath + "/crudHerald/createHerald.js");
+
 function task1_set(session, socket) {
   // setProblem(session, socket, problemSelected);
 
@@ -13,13 +15,15 @@ function task1_set(session, socket) {
     socket.emit("getPreExistedProblemPathResponse", preExistedProblemPath);
   });
 
-  socket.on("generatedProblemsRequest", () => {});
+  socket.on("generateProblemsRequest", () => {});
 
   socket.on("getGeneratedProblemsRequest", () => {});
 
-  socket.on("setProblem", problemPathSelected => {
-    setProblem(session, socket, problemPathSelected);
-    // socket.emit()
+  socket.on("setProblemRequest", problemPathSelected => {
+    console.log("setProblemRequest received");
+    setProblem(session, problemPathSelected);
+    // createHerald(session, socket);
+    socket.emit("setProblemResponse");
   });
 }
 

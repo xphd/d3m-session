@@ -18,14 +18,16 @@ const Session = require("./Session/Session.js");
 // const deleteHerald = require("./crudHerald/deleteHerald.js");
 
 const session = new Session();
+session.setHeralds(new Map());
 
 const tasks = require("./tasks");
+const crudHerald = require("./curdHerald");
 
 serverSocket.on("connection", socket => {
   console.log("Server: connected!");
 
   tasks.set(session, socket);
-
+  crudHerald.set(session, socket);
   // socket.on("createHerald", datasetSelected => {
   //   console.log(datasetSelected);
 

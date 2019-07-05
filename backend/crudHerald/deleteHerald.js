@@ -1,4 +1,4 @@
-function deleteHerald(session, heraldId) {
+function deleteHerald(session, socket, heraldId) {
   const heralds = session.getHeralds();
   if (heralds) {
     heralds.delete(heraldId);

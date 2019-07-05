@@ -35,13 +35,13 @@ export default {
     this.getAllDatasetNames();
   },
   methods: {
+    getAllDatasetNames() {
+      this.$socket.emit("getAllDatasetNamesRequest");
+    },
     setDataset() {
       // console.log("setDatasetRequest sent");
       this.$socket.emit("setDatasetRequest", this.datasetSelected);
       this.confirmed = true;
-    },
-    getAllDatasetNames() {
-      this.$socket.emit("getAllDatasetNamesRequest");
     }
   },
   sockets: {

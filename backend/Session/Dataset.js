@@ -7,6 +7,15 @@ class Dataset {
     this.datasetSchema = require(datasetPath + "/datasetDoc.json");
     console.log(this.datasetSchema.about.datasetID);
     this.learningDataFile = datasetPath + "/tables/learningData.csv";
+
+    //
+    this.allGeneratedProblemPaths = [];
+    //
+
+    //
+    // from seed OR datamart?
+    //
+
     // now get schema from datasetPath
     // let files = fs
     //   .readdirSync(datasetPath)

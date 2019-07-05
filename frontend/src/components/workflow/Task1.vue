@@ -16,8 +16,8 @@
 
     <button @click="generatedProblems()">Generated Problem</button>
     <button @click="getGeneratedProblems()">getGeneratedProblems</button>
-
-    <button @click="setProblem()">Confirm Problem and Create Herald</button>
+    <br />
+    <button @click="setProblemCreateHerald()">Confirm Problem and Create Herald</button>
   </div>
 </template>
 
@@ -33,9 +33,6 @@ export default {
     };
   },
   methods: {
-    setProblem() {
-      this.$socket.emit("setProblemRequest");
-    },
     getGeneratedProblems() {
       this.$socket.emit("getGeneratedProblemsRequest");
     },
@@ -48,8 +45,9 @@ export default {
     getGeneratedProblemPaths() {
       this.$socket.emit("getGeneratedProblemPathsRequest");
     },
-    setProblem() {
-      this.$socket.emit("setProblem", problemPathSelected);
+    setProblemCreateHerald() {
+      this.$socket.emit("setProblemRequest", this.problemPathSelected);
+      // this.$socket.emit("createHeraldRequest");
     },
     path2name(path) {
       let index = path.lastIndexOf("/");

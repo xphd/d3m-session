@@ -14,10 +14,10 @@ function task0_set(session, socket) {
 
   socket.on("setDatasetRequest", datasetSelected => {
     console.log("task0: setDatasetRequest");
-    const herald = new Herald();
-    session.setHerald(herald);
-    setDataset(session, socket, datasetSelected);
-    socket.emit("setDatasetResponse");
+    // const herald = new Herald();
+    // session.setHerald(herald);
+    setDataset(session, datasetSelected);
+    socket.emit("setDatasetResponse"); // go to Task1.vue
   });
 }
 

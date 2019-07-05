@@ -1,6 +1,7 @@
 function getPreExistedProblemPath(session) {
-  let herald = session.getHerald();
-  let dataset = herald.getDataset();
+  // let herald = session.getHerald();
+  // let dataset = herald.getDataset();
+  let dataset = session.getDataset();
   let datasetPath = dataset.getDatasetPath();
 
   // remove last part of "/38_sick_dataset"

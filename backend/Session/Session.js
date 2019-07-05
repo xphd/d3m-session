@@ -11,6 +11,11 @@ class Session {
     // this.dataset = null;
     // this.problem = null;
 
+    //
+    this.dataset = null;
+    this.problem = null;
+    //
+
     // current herald
     this.herald = null;
 
@@ -38,19 +43,38 @@ class Session {
   // getDataset() {
   //   return this.herald.getDataset();
   // }
+  getDataset() {
+    return this.dataset;
+  }
 
-  // getProblem() {
-  //   return this.herald.getProblem();
-  // }
+  setDataset(dataset) {
+    this.dataset = dataset;
+  }
+
+  getProblem() {
+    return this.problem;
+  }
+
+  setProblem(problem) {
+    this.problem = problem;
+    console.log("Session setProblem");
+  }
 
   getHerald() {
     return this.herald;
+  }
+
+  setHerald(herald) {
+    this.herald = herald;
   }
 
   getHeralds() {
     return this.heralds;
   }
 
+  setHeralds(heralds) {
+    this.heralds = heralds;
+  }
   // setters
   // setDataset(dataset) {
   //   // try {
@@ -68,10 +92,6 @@ class Session {
   // setProblem(problem) {
   //   this.problem = problem;
   // }
-
-  setHerald(herald) {
-    this.herald = herald;
-  }
 
   /**
   all the methods for registering and handling callbacks (observer pattern)
