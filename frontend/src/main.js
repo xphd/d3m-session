@@ -4,6 +4,8 @@ import BootstrapVue from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
+import { store } from "./store/store.js";
+
 import VueSocketIO from "vue-socket.io";
 const socket = new VueSocketIO({
   debug: true,
@@ -16,6 +18,7 @@ Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 
 new Vue({
+  store,
   render: function(h) {
     return h(App);
   }

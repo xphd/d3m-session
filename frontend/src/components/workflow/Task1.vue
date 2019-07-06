@@ -27,13 +27,24 @@
 <script>
 export default {
   name: "task-1",
-  data() {
-    return {
-      problemPaths: [],
-      preExistedProblemPath: null,
-      // generatedProblemPath: ["gp1", "gp2"],
-      problemPathSelected: null
-    };
+  // data() {
+  //   return {
+  //     problemPaths: [],
+  //     preExistedProblemPath: null,
+  //     // generatedProblemPath: ["gp1", "gp2"],
+  //     problemPathSelected: null
+  //   };
+  // },
+  computed: {
+    problemsPaths() {
+      return this.$store.state.problemsPaths;
+    },
+    preExistedProblemPath() {
+      return this.$store.state.preExistedProblemPath;
+    },
+    problemPathSelected() {
+      return this.$store.state.problemPathSelected;
+    }
   },
   methods: {
     getGeneratedProblems() {
@@ -53,8 +64,10 @@ export default {
       // this.$socket.emit("createHeraldRequest");
     },
     path2name(path) {
-      let index = path.lastIndexOf("/");
-      return path.substring(index + 1, path.length);
+      if (path) {
+        let index = path.lastIndexOf("/");
+        return path.substring(index + 1, path.length);
+      }
     }
   },
   sockets: {
@@ -62,8 +75,8 @@ export default {
       this.getPreExistedProblemPath();
     },
     getPreExistedProblemPathResponse(preExistedProblemPath) {
-      this.preExistedProblemPath = preExistedProblemPath;
-      this.problemPathSelected = preExistedProblemPath;
+      this.$store.state.preExistedProblemPath = preExistedProblemPath;
+      this.$store.state.problemPathSelected = preExistedProblemPath;
       // let len = this.problemPaths.length;
       // if (len < 1) {
       //   this.problemPaths.push(preExistedProblemPath);

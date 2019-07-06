@@ -14,11 +14,19 @@
 <script>
 export default {
   name: "heralds-overview",
-  data() {
-    return {
-      heralds: [], // for now, they are nothing but ids of heralds
-      heraldIdSelected: null
-    };
+  // data() {
+  //   // return {
+  //   //   heralds: [], // for now, they are nothing but ids of heralds
+  //   //   heraldIdSelected: null
+  //   // };
+  // },
+  computed: {
+    heralds() {
+      return this.$store.state.heralds;
+    },
+    heraldIdSelected() {
+      return this.$store.state.heraldIdSelected;
+    }
   },
   mounted() {
     this.$socket.emit("getAllHeraldsRequest"); // for dev purpose
@@ -34,21 +42,22 @@ export default {
   },
   sockets: {
     getAllHeraldsResponse(heraldIds) {
-      this.heralds = heraldIds;
+      this.$store.state.heralds = heraldIds;
     },
     setProblemResponse() {
       this.$socket.emit("createHeraldRequest");
     },
     createHeraldResponse(heraldId) {
-      this.heralds.push(heraldId);
-      this.heraldIdSelected = heraldId;
+      this.$store.state.heralds.push(heraldId);
+      this.$store.state.heraldIdSelected = heraldId;
     },
     deleteHeraldResponse(heraldId) {
       console.log("Id of heralds to be deleted is:", heraldId);
-      for (let index = 0; index < this.heralds.length; index++) {
-        let item = this.heralds[index];
+      let heralds = this.$store.state.heralds;
+      for (let index = 0; index < heralds.length; index++) {
+        let item = heralds[index];
         if (item == heraldId) {
-          this.heralds.splice(index, 1);
+          heralds.splice(index, 1);
           break;
         }
       }
