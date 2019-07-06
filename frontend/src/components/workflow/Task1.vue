@@ -5,7 +5,7 @@
     <input v-model="problemPathSelected" />
 
     <p>Pre-existed Problem</p>
-    <input type="radio" v-model="problemPathSelected" />
+    <input type="radio" :value="problemPathSelected" v-model="problemPathSelected" />
     {{path2name(problemPathSelected)}}
     <br />
     <!-- <li v-for="(path,index) in problemPaths" :key="index">
@@ -36,15 +36,39 @@ export default {
   //   };
   // },
   computed: {
-    problemsPaths() {
-      return this.$store.state.problemsPaths;
+    problemsPaths: {
+      get() {
+        return this.$store.state.problemsPaths;
+      },
+      set(value) {
+        this.$store.commit("setProblemsPaths", value);
+      }
     },
-    preExistedProblemPath() {
-      return this.$store.state.preExistedProblemPath;
+    preExistedProblemPath: {
+      get() {
+        return this.$store.state.preExistedProblemPath;
+      },
+      set(value) {
+        this.$store.commit("setPreExistedProblemPath", value);
+      }
     },
-    problemPathSelected() {
-      return this.$store.state.problemPathSelected;
+    problemPathSelected: {
+      get() {
+        return this.$store.state.problemPathSelected;
+      },
+      set(value) {
+        this.$store.commit("setProblemPathSelected", value);
+      }
     }
+    // problemsPaths() {
+    //   return this.$store.state.problemsPaths;
+    // },
+    // preExistedProblemPath() {
+    //   return this.$store.state.preExistedProblemPath;
+    // },
+    // problemPathSelected() {
+    //   return this.$store.state.problemPathSelected;
+    // }
   },
   methods: {
     getGeneratedProblems() {
@@ -75,8 +99,10 @@ export default {
       this.getPreExistedProblemPath();
     },
     getPreExistedProblemPathResponse(preExistedProblemPath) {
-      this.$store.state.preExistedProblemPath = preExistedProblemPath;
-      this.$store.state.problemPathSelected = preExistedProblemPath;
+      this.$store.commit("setPreExistedProblemPath", preExistedProblemPath);
+      this.$store.commit("setProblemPathSelected", preExistedProblemPath);
+      // this.$store.state.preExistedProblemPath = preExistedProblemPath;
+      // this.$store.state.problemPathSelected = preExistedProblemPath;
       // let len = this.problemPaths.length;
       // if (len < 1) {
       //   this.problemPaths.push(preExistedProblemPath);

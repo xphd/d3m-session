@@ -64,19 +64,6 @@ export default {
         this.$store.commit("setDatasetConfirmed", value);
       }
     }
-
-    // datasetNames() {
-    //   return this.$store.state.datasetNames;
-    // },
-    // datasetAugNames() {
-    //   return this.$store.state.datasetAugNames;
-    // },
-    // datasetSelected() {
-    //   return this.$store.state.datasetSelected;
-    // },
-    // confirmed() {
-    //   return this.$store.state.datasetConfirmed;
-    // }
   },
   mounted() {
     this.getAllDatasetNames();

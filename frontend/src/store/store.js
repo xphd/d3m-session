@@ -12,7 +12,7 @@ export const store = new Vuex.Store({
     datasetSelected: null,
     datasetConfirmed: false,
     //
-    problemPaths: [],
+    problemPaths: null,
     preExistedProblemPath: null,
     problemPathSelected: null,
     //
@@ -36,10 +36,16 @@ export const store = new Vuex.Store({
     },
     setDatasetConfirmed(state, value) {
       state.datasetConfirmed = value;
-    }
+    },
     //
-    setProblemsPath(state,value){
-      state.
+    setProblemsPaths(state, value) {
+      state.problemPaths = value;
+    },
+    setPreExistedProblemPath(state, value) {
+      state.preExistedProblemPath = value;
+    },
+    setProblemPathSelected(state, value) {
+      state.problemPathSelected = value;
     }
   }
 });
