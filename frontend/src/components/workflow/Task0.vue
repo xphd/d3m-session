@@ -40,8 +40,12 @@ export default {
     },
     setDataset() {
       // console.log("setDatasetRequest sent");
-      this.$socket.emit("setDatasetRequest", this.datasetSelected);
-      this.confirmed = true;
+      if (this.datasetSelected) {
+        this.$socket.emit("setDatasetRequest", this.datasetSelected);
+        this.confirmed = true;
+      } else {
+        // ask user to select dataset
+      }
     }
   },
   sockets: {

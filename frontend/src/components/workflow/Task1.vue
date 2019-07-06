@@ -5,10 +5,13 @@
     <input v-model="problemPathSelected" />
 
     <p>Pre-existed Problem</p>
-    <li v-for="(path,index) in problemPaths" :key="index">
+    <input type="radio" v-model="problemPathSelected" />
+    {{path2name(problemPathSelected)}}
+    <br />
+    <!-- <li v-for="(path,index) in problemPaths" :key="index">
       <input type="radio" :value="path" v-model="problemPathSelected" />
       {{path2name(path)}}
-    </li>
+    </li>-->
 
     <!-- <input type="radio" :value="preExistedProblemPath" v-model="problemPathSelected" />
     {{getNameFromPath(preExistedProblemPath)}}-->
@@ -59,11 +62,13 @@ export default {
       this.getPreExistedProblemPath();
     },
     getPreExistedProblemPathResponse(preExistedProblemPath) {
-      let len = this.problemPaths.length;
-      if (len < 1) {
-        this.problemPaths.push(preExistedProblemPath);
-        this.problemPathSelected = preExistedProblemPath;
-      }
+      this.preExistedProblemPath = preExistedProblemPath;
+      this.problemPathSelected = preExistedProblemPath;
+      // let len = this.problemPaths.length;
+      // if (len < 1) {
+      //   this.problemPaths.push(preExistedProblemPath);
+      //   this.problemPathSelected = preExistedProblemPath;
+      // }
     }
   }
 };
