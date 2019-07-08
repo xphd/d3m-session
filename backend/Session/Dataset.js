@@ -2,7 +2,8 @@ const fs = require("fs");
 
 class Dataset {
   // FIXME: constructor should take a path instead of the old schema
-  constructor(datasetPath) {
+  constructor(datasetPath, datasetSelected) {
+    this.datasetName = datasetSelected;
     this.datasetPath = datasetPath;
     this.datasetSchema = require(datasetPath + "/datasetDoc.json");
     console.log(this.datasetSchema.about.datasetID);
@@ -34,6 +35,10 @@ class Dataset {
     //   this.datasetSchema = require(datasetPath + "/datasetDoc.json");
     //   this.learningDataFile = datasetPath + "/tables/learningData.csv";
     // }
+  }
+
+  getDatasetName() {
+    return this.datasetName;
   }
 
   getDatasetPath() {

@@ -46,6 +46,10 @@ export const store = new Vuex.Store({
     },
     setProblemPathSelected(state, value) {
       state.problemPathSelected = value;
+    },
+    //
+    setHeraldIdSelected(state,value){
+      state.heraldIdSelected=value;
     }
   }
 });

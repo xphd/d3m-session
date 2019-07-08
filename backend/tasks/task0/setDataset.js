@@ -13,11 +13,11 @@ function setDataset(session, datasetSelected) {
     if (datasetPath == currentDatasetPath) {
       // do nothing ?
     } else {
-      let dataset = new Dataset(datasetPath);
+      let dataset = new Dataset(datasetPath, datasetSelected);
       session.setDataset(dataset);
     }
   } else {
-    let dataset = new Dataset(datasetPath);
+    let dataset = new Dataset(datasetPath, datasetSelected);
     session.setDataset(dataset);
   }
 

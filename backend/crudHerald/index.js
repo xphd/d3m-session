@@ -17,8 +17,14 @@ module.exports.set = function(session, socket) {
   });
 
   socket.on("deleteHeraldRequest", heraldIdSelected => {
-    console.log("deleteHeraldRequest received:", heraldIdSelected);
+    // console.log("deleteHeraldRequest received:", heraldIdSelected);
     deleteHerald(session, heraldIdSelected);
     socket.emit("deleteHeraldResponse", heraldIdSelected);
+  });
+
+  socket.on("readHeraldRequest", heraldIdSelected => {
+    console.log("readHeraldRequest received:", heraldIdSelected);
+    let heraldObj = readHerald(session, heraldIdSelected);
+    socket.emit("readHeraldResponse", heraldObj);
   });
 };

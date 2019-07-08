@@ -21,12 +21,25 @@ export default {
   //   // };
   // },
   computed: {
-    heralds() {
-      return this.$store.state.heralds;
+    heralds: {
+      get() {
+        return this.$store.state.heralds;
+      }
     },
-    heraldIdSelected() {
-      return this.$store.state.heraldIdSelected;
+    heraldIdSelected: {
+      get() {
+        return this.$store.state.heraldIdSelected;
+      },
+      set(value) {
+        this.$store.commit("setHeraldIdSelected", value);
+      }
     }
+    // heralds() {
+    //   return this.$store.state.heralds;
+    // },
+    // heraldIdSelected() {
+    //   return this.$store.state.heraldIdSelected;
+    // }
   },
   mounted() {
     this.$socket.emit("getAllHeraldsRequest"); // for dev purpose
@@ -38,7 +51,9 @@ export default {
     deleteHerald() {
       this.$socket.emit("deleteHeraldRequest", this.heraldIdSelected);
     },
-    readHerald() {}
+    readHerald() {
+      this.$socket.emit("readHeraldRequest", this.heraldIdSelected);
+    }
   },
   sockets: {
     getAllHeraldsResponse(heraldIds) {
@@ -61,6 +76,15 @@ export default {
           break;
         }
       }
+    },
+    readHeraldResponse(heraldObj) {
+      // console.log(heraldObj);
+      // heraldIdSelected = heraldObj.heraldIdSelected
+      let datasetSelected = heraldObj.datasetSelected;
+      let problemPathSelected = heraldObj.problemPathSelected;
+      // this.$store.commit("",heraldIdSelected)
+      this.$store.commit("setDatasetSelected", datasetSelected);
+      this.$store.commit("setProblemPathSelected", problemPathSelected);
     }
   }
 };
