@@ -6,7 +6,7 @@ const Problem = require(appRootPath + "/Session/Problem.js");
 function setProblem(session, problemPathSelected) {
   // let problemPath = datasetsPath + problemPathSelected;
   let problem = new Problem(problemPathSelected);
-  session.setProblem(problem);
+  session.setCurrentProblem(problem);
 }
 
 module.exports = setProblem;

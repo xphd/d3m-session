@@ -3,78 +3,85 @@
 
 class Session {
   constructor(devMode = false) {
+    // are we running in development mode (without a ta2)
     this.devMode = devMode;
     console.log("this is session constructor", this.devMode);
     // * callbacks:
     this.datasetCallbacks = [];
-    // * state objects
-    // this.dataset = null;
-    // this.problem = null;
-
-    //
-    this.dataset = null;
-    this.problem = null;
-    //
-
-    // current herald
-    this.herald = null;
-
-    // this is new.
-    this.heralds = null; // new Map()
-    this.heraldId = 0; // alse as counter for heralds
-
-    // are we running in development mode (without a ta2)
-    // this.devMode = false;
 
     // configPath looks like "shared/static/config_files/dev_mode/example_dev_regression_config.json"
     // legacy, compatible for old version
     this.config = null;
+
+    // * state objects
+    // current dataset
+    this.currentDataset = null;
+    // current problem
+    this.currentProblem = null;
+    // current herald
+    this.currentHerald = null;
+    this.currentHeraldId = 0; // random number
+
+    this.heraldsMap = new Map(); // new Map()
+  }
+  /**
+  all the methods for registering and handling callbacks (observer pattern)
+  **/
+  registerDatasetUpdates(f) {
+    this.datasetCallbacks.push(f);
+    if (this.currentDataset) {
+      process.nextTick(() => f(this.currentDataset));
+    }
   }
 
-  //* callbacks:
-  // datasetCallbacks = [];
-  //* state objects
-  // dataset = null;
-  // problem = null;
-  // are we running in development mode (without a ta2)
-  // devMode = false;
-
-  // getters
-  // getDataset() {
-  //   return this.herald.getDataset();
-  // }
-  getDataset() {
-    return this.dataset;
+  handleDatasetChange() {
+    this.datasetCallbacks.forEach(f => process.nextTick(() => f(this.dataset)));
   }
 
-  setDataset(dataset) {
-    this.dataset = dataset;
+  // getters and setters
+  getCurrentDataset() {
+    return this.currentDataset;
+  }
+  setCurrentDataset(currentDataset) {
+    // this.currentDataset = currentDataset;
+    try {
+      this.currentDataset = currentDataset;
+      this.handleDatasetChange();
+    } catch (err) {
+      console.log(err);
+      console.log("WARNING: setting dataset to 'null'");
+      if (this.currentDataset) {
+        this.currentDataset = null;
+        this.handleDatasetChange();
+      }
+    }
   }
 
-  getProblem() {
-    return this.problem;
+  getCurrentProblem() {
+    return this.currentProblem;
+  }
+  setCurrentProblem(currentProblem) {
+    this.currentProblem = currentProblem;
+    // console.log("Session setProblem");
   }
 
-  setProblem(problem) {
-    this.problem = problem;
-    console.log("Session setProblem");
+  getCurrentHerald() {
+    return this.currentHerald;
+  }
+  setCurrentHerald(currentHerald) {
+    this.currentHerald = currentHerald;
   }
 
-  getHerald() {
-    return this.herald;
+  getCurrentHeraldId() {
+    return this.herald.getId();
   }
+  // setCurrentHeraldId(){}
 
-  setHerald(herald) {
-    this.herald = herald;
+  getHeraldsMap() {
+    return this.heraldsMap;
   }
+  // setHeralds() {}
 
-  getHeralds() {
-    return this.heralds;
-  }
-
-  setHeralds(heralds) {
-    this.heralds = heralds;
-  }
   // setters
   // setDataset(dataset) {
   //   // try {
@@ -88,24 +95,6 @@ class Session {
   //   //   }
   //   // }
   // }
-
-  // setProblem(problem) {
-  //   this.problem = problem;
-  // }
-
-  /**
-  all the methods for registering and handling callbacks (observer pattern)
-  **/
-  registerDatasetUpdates(f) {
-    this.datasetCallbacks.push(f);
-    if (this.dataset) {
-      process.nextTick(() => f(this.dataset));
-    }
-  }
-
-  handleDatasetChange() {
-    this.datasetCallbacks.forEach(f => process.nextTick(() => f(this.dataset)));
-  }
 }
 
 module.exports = Session;

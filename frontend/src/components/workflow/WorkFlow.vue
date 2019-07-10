@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p>{{value}}</p>
+    <!-- <p>{{value}}</p>
     <button @click="addOne()">Add One</button>
-    <h1>Work Flow</h1>
+    <h1>Work Flow</h1>-->
     <Task0 />
     <hr />
     <Task1 />

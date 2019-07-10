@@ -1,11 +1,11 @@
 function readHerald(session, heraldIdSelected) {
-  let heralds = session.getHeralds();
+  let heralds = session.getHeraldsMap();
   let herald = heralds.get(heraldIdSelected);
   let dataset = herald.getDataset();
   let problem = herald.getProblem();
-  session.setHerald(herald);
-  session.setDataset(dataset);
-  session.setProblem(problem);
+  session.setCurrentHerald(herald);
+  session.setCurrentDataset(dataset);
+  session.setCurrentProblem(problem);
 
   let heraldObj = {
     heraldIdSelected: herald.getId(),

@@ -5,7 +5,7 @@ const readHerald = require("./readHerald.js");
 module.exports.set = function(session, socket) {
   // for dev purpose, maybe removed later
   socket.on("getAllHeraldsRequest", () => {
-    let heraldsMap = session.getHeralds();
+    let heraldsMap = session.getHeraldsMap();
     let heraldIds = Array.from(heraldsMap.keys());
     socket.emit("getAllHeraldsResponse", heraldIds);
   });

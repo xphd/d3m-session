@@ -10,6 +10,7 @@ class Dataset {
     this.learningDataFile = datasetPath + "/tables/learningData.csv";
 
     //
+    this.isAllProblemsGenerated = false;
     this.allGeneratedProblemPaths = [];
     //
 
@@ -51,6 +52,14 @@ class Dataset {
 
   getLearningDataFile() {
     return this.learningDataFile;
+  }
+
+  setAllGeneratedProblemPaths(allGeneratedProblemPaths) {
+    if (this.isAllProblemsGenerated) {
+      // notify
+    } else {
+      this.allGeneratedProblemPaths = allGeneratedProblemPaths;
+    }
   }
 }
 

@@ -7,28 +7,28 @@ const datasetsPath = appRootPath + "/static/local_testing_data/";
 function setDataset(session, datasetSelected) {
   let datasetPath =
     datasetsPath + datasetSelected + "/" + datasetSelected + "_dataset";
-  let currentDataset = session.getDataset();
+  let currentDataset = session.getCurrentDataset();
   if (currentDataset) {
     let currentDatasetPath = currentDataset.getDatasetPath();
     if (datasetPath == currentDatasetPath) {
       // do nothing ?
     } else {
       let dataset = new Dataset(datasetPath, datasetSelected);
-      session.setDataset(dataset);
+      session.setCurrentDataset(dataset);
     }
   } else {
     let dataset = new Dataset(datasetPath, datasetSelected);
-    session.setDataset(dataset);
+    session.setCurrentDataset(dataset);
   }
 
   // if (datasetPath == currentDatasetPath) {
   //   // do nothing ?
   // } else {
   //   let dataset = new Dataset(datasetPath);
-  //   session.setDataset(dataset);
+  //   session.setCurrentDataset(dataset);
   // }
 
-  // let herald = session.getHerald();
+  // let herald = session.getCurrentHerald();
   // herald.setDataset(dataset);
 }
 

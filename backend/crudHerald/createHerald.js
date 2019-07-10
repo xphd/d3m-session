@@ -10,17 +10,21 @@ function createHerald(session) {
   // if both are the same
   // herald should not be created?
 
-  let heraldId = session.heraldId;
+  let heraldsMap = session.getHeraldsMap();
+
+  let heraldId = Math.floor(Math.random() * 1000); //0-999
+  while (heraldsMap.has(heraldId)) {
+    heraldId = Math.floor(Math.random() * 1000); //0-999
+  }
+  // check if heraldId is unique
+
   let herald = new Herald(heraldId);
-  herald.setDataset(session.getDataset());
-  herald.setProblem(session.getProblem());
-  session.setHerald(herald);
+  herald.setDataset(session.getCurrentDataset());
+  herald.setProblem(session.getCurrentProblem());
+  session.setCurrentHerald(herald);
 
-  // herald.setId(heraldId);
-  session.heralds.set(heraldId, herald);
+  heraldsMap.set(heraldId, herald);
 
-  // update id
-  session.heraldId = heraldId + 1;
   return heraldId;
   // socket.emit("createHerald", heraldId);
 }
@@ -43,7 +47,7 @@ function createHerald(session) {
 
 //   herald.setDataset(dataset);
 //   herald.setProblem(problem);
-//   session.setHerald(herald);
+//   session.setCurrentHerald(herald);
 
 //   session.heralds.set(newId, herald);
 
