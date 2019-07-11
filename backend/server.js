@@ -14,8 +14,8 @@ server.listen(9090);
 const Session = require("./Session/Session.js");
 const session = new Session();
 
-const tasks = require("./tasks");
-const crudHerald = require("./crudHerald");
+const tasks = require("./socket_listeners/tasks");
+const crudHerald = require("./socket_listeners/crudHerald");
 
 serverSocket.on("connection", socket => {
   console.log("Server: connected!");
