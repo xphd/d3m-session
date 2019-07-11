@@ -16,7 +16,7 @@ function task2_set(session, socket) {
   socket.on("helloSearch", () => {
     let herald = session.getCurrentHerald();
     relay.connect(herald);
-    relay.helloLoop(herald).then(relay.searchSolutions);
+    relay.helloLoop(herald); //.then(relay.searchSolutions);
   });
 
   // socket.on("getAllSolutions", () => {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Task 1: Problem Discovery</h1>
+    <!-- <h1>Task 1: Problem Discovery</h1> -->
 
     <input v-model="problemPathSelected" />
 
@@ -8,17 +8,9 @@
     <input type="radio" :value="problemPathSelected" v-model="problemPathSelected" />
     {{path2name(problemPathSelected)}}
     <br />
-    <!-- <li v-for="(path,index) in problemPaths" :key="index">
-      <input type="radio" :value="path" v-model="problemPathSelected" />
-      {{path2name(path)}}
-    </li>-->
 
-    <!-- <input type="radio" :value="preExistedProblemPath" v-model="problemPathSelected" />
-    {{getNameFromPath(preExistedProblemPath)}}-->
-    <!-- <input type="radio" :value="preExistedProblemPath" v-model="problemPathSelected" /> -->
-
-    <button @click="generatedProblems()">Generated Problem</button>
-    <button @click="getGeneratedProblems()">getGeneratedProblems</button>
+    <!-- <button @click="generatedProblems()">Generated Problem</button>
+    <button @click="getGeneratedProblems()">getGeneratedProblems</button>-->
     <br />
     <button @click="setProblemCreateHerald()">Confirm Problem and Create Herald</button>
   </div>
@@ -27,14 +19,6 @@
 <script>
 export default {
   name: "task-1",
-  // data() {
-  //   return {
-  //     problemPaths: [],
-  //     preExistedProblemPath: null,
-  //     // generatedProblemPath: ["gp1", "gp2"],
-  //     problemPathSelected: null
-  //   };
-  // },
   computed: {
     problemsPaths: {
       get() {
@@ -60,15 +44,6 @@ export default {
         this.$store.commit("setProblemPathSelected", value);
       }
     }
-    // problemsPaths() {
-    //   return this.$store.state.problemsPaths;
-    // },
-    // preExistedProblemPath() {
-    //   return this.$store.state.preExistedProblemPath;
-    // },
-    // problemPathSelected() {
-    //   return this.$store.state.problemPathSelected;
-    // }
   },
   methods: {
     getGeneratedProblems() {
@@ -85,7 +60,6 @@ export default {
     },
     setProblemCreateHerald() {
       this.$socket.emit("setProblemRequest", this.problemPathSelected);
-      // this.$socket.emit("createHeraldRequest");
     },
     path2name(path) {
       if (path) {
@@ -101,13 +75,7 @@ export default {
     getPreExistedProblemPathResponse(preExistedProblemPath) {
       this.$store.commit("setPreExistedProblemPath", preExistedProblemPath);
       this.$store.commit("setProblemPathSelected", preExistedProblemPath);
-      // this.$store.state.preExistedProblemPath = preExistedProblemPath;
-      // this.$store.state.problemPathSelected = preExistedProblemPath;
-      // let len = this.problemPaths.length;
-      // if (len < 1) {
-      //   this.problemPaths.push(preExistedProblemPath);
-      //   this.problemPathSelected = preExistedProblemPath;
-      // }
+      this.setProblemCreateHerald(); // dev purpose
     }
   }
 };
