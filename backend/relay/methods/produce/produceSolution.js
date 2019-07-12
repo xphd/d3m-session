@@ -32,10 +32,10 @@ function produceSolution(herald, solution) {
   // leaving empty: repeated SolutionRunUser users = 5;
 
   // store request
-  if (props.isRequest) {
+  if (herald.isRequest) {
     let requestStr = JSON.stringify(request);
     let path =
-      props.REQUESTS_PATH + "produceSolutionRequests/" + solution_id + ".json";
+      herald.REQUESTS_PATH + "produceSolutionRequests/" + solution_id + ".json";
     fs.writeFileSync(path, requestStr);
   }
   //
@@ -51,8 +51,8 @@ function produceSolution(herald, solution) {
         getProduceSolutionResults(solution, request_id, fulfill, reject);
 
         // Added by Alex, for the purpose of Pipeline Visulization
-        if (props.isResponse) {
-          let pathPrefix = props.RESPONSES_PATH + "produceSolutionResponses/";
+        if (herald.isResponse) {
+          let pathPrefix = herald.RESPONSES_PATH + "produceSolutionResponses/";
           // let pathMid = produceSolutionRequestID;
           let pathMid = solution_id;
           let pathAffix = ".json";

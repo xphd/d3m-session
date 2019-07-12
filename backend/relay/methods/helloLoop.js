@@ -7,34 +7,35 @@ const appRootPath = require("app-root-path");
 
 function helloLoop(herald) {
   console.log("helloLoop begin");
-  if (herald.isRequest) {
-    let REQUESTS_PATH =
-      appRootPath + "/output/herald_" + herald.getId() + "/requests";
-    let RESPONSES_PATH =
-      appRootPath + "/output/herald_" + herald.getId() + "/responses";
-
-    herald.REQUESTS_PATH = REQUESTS_PATH;
-    herald.RESPONSES_PATH = RESPONSES_PATH;
-
-    let pathPrefix = herald.REQUESTS_PATH;
-    if (fs.existsSync(pathPrefix)) {
+  if (herald.isRequest || herald.isResponse) {
+    let heraldPath = appRootPath + "/output/herald_" + herald.getId();
+    if (fs.existsSync(heraldPath)) {
       console.log("Remove old request folder!");
-      fse.removeSync(pathPrefix);
+      fse.removeSync(heraldPath);
     }
-    console.log("Create new request folder!!");
-    fs.mkdirSync(pathPrefix);
-  }
+    fs.mkdirSync(heraldPath);
 
-  if (herald.isResponse) {
-    let pathPrefix = herald.RESPONSES_PATH;
-    if (fs.existsSync(pathPrefix)) {
-      console.log("Remove old responses folder!");
-      fse.removeSync(pathPrefix);
+    if (herald.isRequest) {
+      let REQUESTS_PATH = heraldPath + "/requests/";
+      console.log("REQUESTS_PATH", REQUESTS_PATH);
+      herald.REQUESTS_PATH = REQUESTS_PATH;
+      console.log("Create new request folder!!");
+      fs.mkdirSync(REQUESTS_PATH);
     }
-    console.log("Create new responses folder!!");
-    fs.mkdirSync(pathPrefix);
+
+    if (herald.isResponse) {
+      let RESPONSES_PATH = heraldPath + "/responses/";
+      console.log("RESPONSES_PATH", RESPONSES_PATH);
+      herald.RESPONSES_PATH = RESPONSES_PATH;
+      if (fs.existsSync(RESPONSES_PATH)) {
+        console.log("Remove old responses folder!");
+        fse.removeSync(RESPONSES_PATH);
+      }
+      console.log("Create new responses folder!!");
+      fs.mkdirSync(RESPONSES_PATH);
+    }
   }
-  let request = new proto.HelloRequest();
+  let request = new proto.HelloRequest(); // HelloRequest is nothing but {}
   let waiting = false;
   let promise = new Promise((fulfill, reject) => {
     setInterval(() => {

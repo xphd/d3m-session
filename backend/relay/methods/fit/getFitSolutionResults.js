@@ -13,14 +13,14 @@ function getFitSolutionResults(herald, solution, request_id, fulfill, reject) {
   function fun(fulfill, reject) {
     let client = herald.getClient();
 
-    // if (props.isRequest) {
-    //   let pathPrefix = props.REQUESTS_PATH + "getFitSolutionResultsRequests/";
-    //   let pathMid = request_id;
-    //   let pathAffix = ".json";
-    //   let path = pathPrefix + pathMid + pathAffix;
-    //   let responseStr = JSON.stringify(request);
-    //   fs.writeFileSync(path, responseStr);
-    // }
+    if (herald.isRequest) {
+      let pathPrefix = herald.REQUESTS_PATH + "getFitSolutionResultsRequests/";
+      let pathMid = request_id;
+      let pathAffix = ".json";
+      let path = pathPrefix + pathMid + pathAffix;
+      let responseStr = JSON.stringify(request);
+      fs.writeFileSync(path, responseStr);
+    }
 
     let call = client.getFitSolutionResults(request);
     call.on("data", response => {
@@ -47,15 +47,15 @@ function getFitSolutionResults(herald, solution, request_id, fulfill, reject) {
         // console.log("==========");
 
         // Added by Alex, for the purpose of Pipeline Visulization
-        // if (props.isResponse) {
-        //   let pathPrefix =
-        //     props.RESPONSES_PATH + "getFitSolutionResultsResponses/";
-        //   let pathMid = solution_id;
-        //   let pathAffix = ".json";
-        //   let path = pathPrefix + pathMid + pathAffix;
-        //   let responseStr = JSON.stringify(response);
-        //   fs.writeFileSync(path, responseStr);
-        // }
+        if (herald.isResponse) {
+          let pathPrefix =
+            herald.RESPONSES_PATH + "getFitSolutionResultsResponses/";
+          let pathMid = solution_id;
+          let pathAffix = ".json";
+          let path = pathPrefix + pathMid + pathAffix;
+          let responseStr = JSON.stringify(response);
+          fs.writeFileSync(path, responseStr);
+        }
       } else if (state === "ERRORED") {
         console.log(state);
         console.log(response);

@@ -22,13 +22,13 @@ function fitSolution(herald, solution) {
   // leave empty: repeated SolutionRunUser users = 5;
 
   // store request
-  // if (props.isRequest) {
-  //   let requestStr = JSON.stringify(request);
-  //   let path =
-  //     props.REQUESTS_PATH + "fitSolutionRequests/" + solution_id + ".json";
-  //   fs.writeFileSync(path, requestStr);
-  // }
-  //
+  if (herald.isRequest) {
+    let requestStr = JSON.stringify(request);
+    let path =
+      herald.REQUESTS_PATH + "fitSolutionRequests/" + solution_id + ".json";
+    fs.writeFileSync(path, requestStr);
+  }
+
   function fun(fulfill, reject) {
     let client = herald.getClient();
     // console.log("fitSolutionRequest:")
@@ -42,14 +42,14 @@ function fitSolution(herald, solution) {
         // getFitSolutionResults(solution, request_id, fulfill, reject);
 
         // Added by Alex, for the purpose of Pipeline Visulization
-        // if (props.isResponse) {
-        //   let pathPrefix = props.RESPONSES_PATH + "fitSolutionResponses/";
-        //   let pathMid = solution_id;
-        //   let pathAffix = ".json";
-        //   let path = pathPrefix + pathMid + pathAffix;
-        //   let responseStr = JSON.stringify(response);
-        //   fs.writeFileSync(path, responseStr);
-        // }
+        if (herald.isResponse) {
+          let pathPrefix = herald.RESPONSES_PATH + "fitSolutionResponses/";
+          let pathMid = solution_id;
+          let pathAffix = ".json";
+          let path = pathPrefix + pathMid + pathAffix;
+          let responseStr = JSON.stringify(response);
+          fs.writeFileSync(path, responseStr);
+        }
       }
     });
   }

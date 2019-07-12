@@ -7,7 +7,7 @@ class Herald {
     this.problem = null;
     this.client = null;
     this.port = "localhost:50054"; // port for ta2
-    this.solutions = null;
+    this.solutions = new Map();
 
     // not to be private
     this.isConnected = false;

@@ -10,8 +10,9 @@ function getProduceSolutionResults(solution, request_id, fulfill, reject) {
   let request = new proto.GetProduceSolutionResultsRequest();
   request.setRequestId(request_id);
 
-  if (props.isRequest) {
-    let pathPrefix = props.REQUESTS_PATH + "getProduceSolutionResultsRequests/";
+  if (herald.isRequest) {
+    let pathPrefix =
+      herald.REQUESTS_PATH + "getProduceSolutionResultsRequests/";
     let pathMid = request_id;
     let pathAffix = ".json";
     let path = pathPrefix + pathMid + pathAffix;
@@ -56,9 +57,9 @@ function getProduceSolutionResults(solution, request_id, fulfill, reject) {
       }
 
       // Added by Alex, for the purpose of Pipeline Visulization
-      if (props.isResponse) {
+      if (herald.isResponse) {
         let pathPrefix =
-          props.RESPONSES_PATH + "getProduceSolutionResultsResponses/";
+          herald.RESPONSES_PATH + "getProduceSolutionResultsResponses/";
         let pathMid = request_id;
         let pathAffix = ".json";
         let path = pathPrefix + pathMid + pathAffix;

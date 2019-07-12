@@ -1,10 +1,6 @@
 const fs = require("fs");
 const getSearchSolutionsResults = require("./getSearchSolutionsResults.js");
 
-// import variables
-// const props = require("../../props");
-// const proto = props.proto;
-
 // import functions
 const getMappedType = require("../../functions/getMappedType");
 // const getProblemSchema = require("../../functions/getProblemSchema");
@@ -15,22 +11,14 @@ const metric_mappings = require("../../mappings/metric_mappings");
 const task_subtype_mappings = require("../../mappings/task_subtype_mappings");
 const task_type_mappings = require("../../mappings/task_type_mappings");
 
-// const evaluationConfig = require(props.CONFIG_PATH);
-
 const proto = require("../../proto.js");
 const config = require("../../config.js");
 
 function searchSolutions(herald) {
   console.log("searchSolutions begin");
-  // const props = herald.props;
-  // const proto = props.proto;
-  // const sessionVar = props.sessionVar;
-  // const evaluationConfig =
-  // let session = herald.getSession();
   let datasetH = herald.getDataset();
   let problemH = herald.getProblem();
 
-  // let datasetSchema = datasetSession.getDatasetSchema();
   let problemSchema = problemH.getProblemSchema();
 
   let userAgentTA3 = config.userAgentTA3;
@@ -139,12 +127,11 @@ function searchSolutions(herald) {
   request.setProblem(problem_desc);
 
   // store request
-  // if (props.isRequest) {
-  //   let requestStr = JSON.stringify(request);
-  //   let path = props.REQUESTS_PATH + "SearchSolutionsRequest.json";
-  //   fs.writeFileSync(path, requestStr);
-  // }
-  //
+  if (herald.isRequest) {
+    let requestStr = JSON.stringify(request);
+    let path = herald.REQUESTS_PATH + "SearchSolutionsRequest.json";
+    fs.writeFileSync(path, requestStr);
+  }
 
   // console.log("REQUEST", JSON.stringify(request, null, 4));
   function fun(fulfill, reject) {
@@ -156,12 +143,12 @@ function searchSolutions(herald) {
         reject(err);
       } else {
         // store response
-        // if (props.isResponse) {
-        //   let responseStr = JSON.stringify(response);
-        //   let path = props.RESPONSES_PATH + "searchSolutionsResponse.json";
-        //   fs.writeFileSync(path, responseStr);
-        // }
-        //
+        if (herald.isResponse) {
+          let responseStr = JSON.stringify(response);
+          let path = herald.RESPONSES_PATH + "searchSolutionsResponse.json";
+          fs.writeFileSync(path, responseStr);
+        }
+
         herald.search_id = response.search_id;
         // setTimeout(() => getSearchSolutionsResults(sessionVar, fulfill, reject), 180000);
         getSearchSolutionsResults(herald, fulfill, reject);
