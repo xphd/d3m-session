@@ -24,6 +24,12 @@ class Herald {
     //   "static/local_testing_data/196_autoMpg/196_autoMpg_solution/model_B.csv",
     //   "static/local_testing_data/196_autoMpg/196_autoMpg_solution/model_C.csv"
     // ]; // []
+
+    // for dev, debug integrate with ta2 purpose
+    this.isRequest = true;
+    this.isResponse = true;
+    this.REQUESTS_PATH = null; //""
+    this.RESPONSES_PATH = null; //""
   }
 
   getId() {

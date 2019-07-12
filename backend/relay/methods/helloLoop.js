@@ -1,29 +1,39 @@
 const proto = require("../proto.js");
 
-// const fs = require("fs");
-// const fse = require("fs-extra");
+const fs = require("fs");
+const fse = require("fs-extra");
+
+const appRootPath = require("app-root-path");
 
 function helloLoop(herald) {
   console.log("helloLoop begin");
-  // if (props.isRequest) {
-  //   let pathPrefix = props.REQUESTS_PATH;
-  //   if (fs.existsSync(pathPrefix)) {
-  //     console.log("Remove old request folder!");
-  //     fse.removeSync(pathPrefix);
-  //   }
-  //   console.log("Create new request folder!!");
-  //   fs.mkdirSync(pathPrefix);
-  // }
+  if (herald.isRequest) {
+    let REQUESTS_PATH =
+      appRootPath + "/output/herald_" + herald.getId() + "/requests";
+    let RESPONSES_PATH =
+      appRootPath + "/output/herald_" + herald.getId() + "/responses";
 
-  // if (props.isResponse) {
-  //   let pathPrefix = props.RESPONSES_PATH;
-  //   if (fs.existsSync(pathPrefix)) {
-  //     console.log("Remove old responses folder!");
-  //     fse.removeSync(pathPrefix);
-  //   }
-  //   console.log("Create new responses folder!!");
-  //   fs.mkdirSync(pathPrefix);
-  // }
+    herald.REQUESTS_PATH = REQUESTS_PATH;
+    herald.RESPONSES_PATH = RESPONSES_PATH;
+
+    let pathPrefix = herald.REQUESTS_PATH;
+    if (fs.existsSync(pathPrefix)) {
+      console.log("Remove old request folder!");
+      fse.removeSync(pathPrefix);
+    }
+    console.log("Create new request folder!!");
+    fs.mkdirSync(pathPrefix);
+  }
+
+  if (herald.isResponse) {
+    let pathPrefix = herald.RESPONSES_PATH;
+    if (fs.existsSync(pathPrefix)) {
+      console.log("Remove old responses folder!");
+      fse.removeSync(pathPrefix);
+    }
+    console.log("Create new responses folder!!");
+    fs.mkdirSync(pathPrefix);
+  }
   let request = new proto.HelloRequest();
   let waiting = false;
   let promise = new Promise((fulfill, reject) => {
@@ -44,19 +54,18 @@ function helloLoop(herald) {
           console.log("Success!Hello");
           herald.isConnected = true;
           herald.ta2Ident = response;
-          // props.allowed_val_types = response.allowed_value_types;
           console.log("response");
           fulfill(herald);
 
           // Added by Alex, for the purpose of Pipeline Visulization
-          // if (props.isResponse) {
-          //   let pathPrefix = props.RESPONSES_PATH;
-          //   let pathMid = "helloResponse";
-          //   let pathAffix = ".json";
-          //   let path = pathPrefix + pathMid + pathAffix;
-          //   let responseStr = JSON.stringify(response);
-          //   fs.writeFileSync(path, responseStr);
-          // }
+          if (herald.isResponse) {
+            let pathPrefix = herald.RESPONSES_PATH;
+            let pathMid = "helloResponse";
+            let pathAffix = ".json";
+            let path = pathPrefix + pathMid + pathAffix;
+            let responseStr = JSON.stringify(response);
+            fs.writeFileSync(path, responseStr);
+          }
         }
       });
     }, 10000);

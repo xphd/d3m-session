@@ -12,6 +12,7 @@
   "dependencies": {
     "app-root-path": "^2.2.1",
     "express": "^4.16.4",
+    "fs-extra": "^8.1.0",
     "grpc": "^1.22.2",
     "lodash": "^4.17.14",
     "socket.io": "^2.2.0"
