@@ -5,10 +5,15 @@
     <button @click="helloSearch">Hello and Search Solutions</button>
     <br />
     <button @click="getAllSolutions()">GetAll</button>
+    <br />
     <button @click="scoreSelectedSolutions()">scoreSelected</button>
+    <br />
     <button @click="describeSolutions()">describe</button>
+    <br />
     <button @click="fitSolutions()">fit</button>
+    <br />
     <button @click="produceSolutions()">produce</button>
+    <br />
     <button @click="exportSolutions()">export</button>
 
     <div>

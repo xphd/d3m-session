@@ -8,10 +8,17 @@
     <button @click="deleteHerald()">Delete herald</button>
     <button @click="readHerald()">Read Herald</button>
     <!-- <button @click="viewHerald()">ViewHerald()</button> -->
+
+    <Task0 />
+    <hr />
+    <Task1 />
+    <hr />
   </div>
 </template>
 
 <script>
+import Task0 from "./Task0.vue";
+import Task1 from "./Task1.vue";
 export default {
   name: "heralds-overview",
   // data() {
@@ -20,6 +27,10 @@ export default {
   //   //   heraldIdSelected: null
   //   // };
   // },
+  components: {
+    Task0,
+    Task1
+  },
   computed: {
     heralds: {
       get() {

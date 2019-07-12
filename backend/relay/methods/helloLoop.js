@@ -1,6 +1,6 @@
 const proto = require("../proto.js");
 
-const fs = require("fs");
+// const fs = require("fs");
 // const fse = require("fs-extra");
 
 function helloLoop(herald) {

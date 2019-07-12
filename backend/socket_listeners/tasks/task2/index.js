@@ -16,7 +16,14 @@ function task2_set(session, socket) {
   socket.on("helloSearch", () => {
     let herald = session.getCurrentHerald();
     relay.connect(herald);
-    relay.helloLoop(herald); //.then(relay.searchSolutions);
+    relay
+      .helloLoop(herald)
+      .then(relay.searchSolutions)
+      .then(relay.scoreSolutions)
+      .then(relay.describeSolutions)
+      .then(relay.fitSolutions)
+      .then(relay.produceSolutions)
+      .then(relay.exportFittedSolutions);
   });
 
   // socket.on("getAllSolutions", () => {
@@ -63,8 +70,8 @@ function task2_set(session, socket) {
 module.exports.set = task2_set;
 
 // searchSolutions
-// then(grpcClientWrapper.scoreSolutions)
-//       .then(grpcClientWrapper.describeSolutions)
-//       .then(grpcClientWrapper.fitSolutions)
-//       .then(grpcClientWrapper.produceSolutions)
-//       .then(grpcClientWrapper.endSearchSolutions)
+// then(relay.scoreSolutions)
+//       .then(relay.describeSolutions)
+//       .then(relay.fitSolutions)
+//       .then(relay.produceSolutions)
+//       .then(relay.endSearchSolutions)

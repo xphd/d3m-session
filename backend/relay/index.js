@@ -13,6 +13,17 @@ exports.connect = require("./functions/connect.js");
 exports.helloLoop = require("./methods/helloLoop.js");
 
 exports.searchSolutions = require("./methods/search/searchSolutions.js");
+
+exports.scoreSolutions = require("./methods/score/scoreSolutions.js");
+
+exports.describeSolutions = require("./methods/describe/describeSolutions.js");
+
+exports.fitSolutions = require("./methods/fit/fitSolutions.js");
+
+exports.produceSolutions = require("./methods/produce/produceSolutions.js");
+
+exports.exportFittedSolutions = require("./methods/export/exportFittedSolutions.js");
+
 // const endSearchSolutions = require("./methods/endSearchSolutions");
 // const listPrimitives = require("./methods/listPrimitives");
 // const searchSolutions = require("./methods/search/searchSolutions");

@@ -11,7 +11,7 @@ function getFitSolutionResults(herald, solution, request_id, fulfill, reject) {
   request.setRequestId(request_id);
 
   function fun(fulfill, reject) {
-    let client = props.client;
+    let client = herald.getClient();
 
     // if (props.isRequest) {
     //   let pathPrefix = props.REQUESTS_PATH + "getFitSolutionResultsRequests/";

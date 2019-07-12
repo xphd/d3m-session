@@ -20,7 +20,7 @@ function getProduceSolutionResults(solution, request_id, fulfill, reject) {
   }
 
   let promise = new Promise((fulfill, reject) => {
-    let client = props.client;
+    let client = herald.getClient();
     // console.log("GetProduceSolutionResultsRequest", request);
     let call = client.GetProduceSolutionResults(request);
     call.on("data", response => {

@@ -46,14 +46,14 @@ function describeSolution(herald, solution) {
         fulfill(herald, solution);
 
         // Added by Alex, for the purpose of Pipeline Visulization
-        if (props.isResponse) {
-          let pathPrefix = props.RESPONSES_PATH + "describeSolutionResponses/";
-          let pathMid = solution_id;
-          let pathAffix = ".json";
-          let path = pathPrefix + pathMid + pathAffix;
-          let responseStr = JSON.stringify(response);
-          fs.writeFileSync(path, responseStr);
-        }
+        // if (props.isResponse) {
+        //   let pathPrefix = props.RESPONSES_PATH + "describeSolutionResponses/";
+        //   let pathMid = solution_id;
+        //   let pathAffix = ".json";
+        //   let path = pathPrefix + pathMid + pathAffix;
+        //   let responseStr = JSON.stringify(response);
+        //   fs.writeFileSync(path, responseStr);
+        // }
       }
     });
   }

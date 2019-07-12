@@ -10,7 +10,7 @@ function produceSolutions(herald) {
     console.log("produceSolutions", solution);
     if (solution.fit) {
       chain = chain.then(() => {
-        return produceSolution(solution);
+        return produceSolution(herald, solution);
       });
     } else {
       console.log("No produce:", solution.solution_id);

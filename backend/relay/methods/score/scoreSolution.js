@@ -124,7 +124,7 @@ function scoreSolution(herald, solution) {
   //
 
   let promise = new Promise((fulfill, reject) => {
-    let client = props.client;
+    let client = herald.getClient();
     client.scoreSolution(request, (err, response) => {
       if (err) {
         reject(err);

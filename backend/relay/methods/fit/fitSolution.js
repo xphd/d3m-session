@@ -30,7 +30,7 @@ function fitSolution(herald, solution) {
   // }
   //
   function fun(fulfill, reject) {
-    let client = props.client;
+    let client = herald.getClient();
     // console.log("fitSolutionRequest:")
     // console.log(request);
     client.fitSolution(request, (err, response) => {
@@ -39,6 +39,7 @@ function fitSolution(herald, solution) {
       } else {
         let request_id = response.request_id;
         getFitSolutionResults(herald, solution, request_id, fulfill, reject);
+        // getFitSolutionResults(solution, request_id, fulfill, reject);
 
         // Added by Alex, for the purpose of Pipeline Visulization
         // if (props.isResponse) {

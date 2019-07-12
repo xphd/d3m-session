@@ -1,6 +1,6 @@
 const fs = require("fs");
 const appRoot = require("app-root-path");
-const evaluationConfig = require(appRoot + "/tufts_gt_wisc_configuration.json");
+// const evaluationConfig = require(appRoot + "/tufts_gt_wisc_configuration.json");
 
 const proto = require("../../proto.js");
 
@@ -9,14 +9,18 @@ const handleImageUrl = require("../../functions/handleImageUrl.js");
 
 const getProduceSolutionResults = require("./getProduceSolutionResults.js");
 
-function produceSolution(solution) {
+function produceSolution(herald, solution) {
+  let datasetH = herald.getDataset();
   let solution_id = solution.solution_id;
   // console.log("produce solution called");
   let request = new proto.ProduceSolutionRequest();
   request.setFittedSolutionId(solution.fit.fit_id);
   let dataset_input = new proto.Value();
+  // dataset_input.setDatasetUri(
+  //   "file://" + handleImageUrl(evaluationConfig.dataset_schema)
+  // );
   dataset_input.setDatasetUri(
-    "file://" + handleImageUrl(evaluationConfig.dataset_schema)
+    "file://" + handleImageUrl(datasetH.getDatasetPath() + "/datasetDoc.json")
   );
   request.setInputs(dataset_input);
   /*
@@ -37,7 +41,7 @@ function produceSolution(solution) {
   //
 
   let promise = new Promise((fulfill, reject) => {
-    let client = props.client;
+    let client = herald.getClient();
     // console.log("produceSolutionRequest", request);
     client.produceSolution(request, (err, response) => {
       if (err) {
