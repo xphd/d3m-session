@@ -4,7 +4,7 @@ const fs = require("fs");
 const proto = require("../../proto.js");
 
 function getFitSolutionResults(herald, solution, request_id, fulfill, reject) {
-  // let solution_id = solution.solution_id;
+  let solution_id = solution.solution_id;
   let _fulfill = fulfill;
   let _reject = reject;
   let request = new proto.GetFitSolutionResultsRequest();
