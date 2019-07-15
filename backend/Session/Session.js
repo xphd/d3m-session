@@ -8,12 +8,14 @@ class Session {
     console.log("this is session constructor", this.devMode);
     // * callbacks:
     this.datasetCallbacks = [];
+    this.problemCallbacks = [];
 
     // configPath looks like "shared/static/config_files/dev_mode/example_dev_regression_config.json"
     // legacy, compatible for old version
     this.config = null;
 
     // * state objects
+    // use getters and setters whenever possible
     // current dataset
     this.currentDataset = null;
     // current problem
@@ -35,7 +37,28 @@ class Session {
   }
 
   handleDatasetChange() {
-    this.datasetCallbacks.forEach(f => process.nextTick(() => f(this.dataset)));
+    this.datasetCallbacks.forEach(f =>
+      process.nextTick(() => f(this.currentDataset))
+    );
+  }
+
+  registerProblemUpdates(f) {
+    this.problemCallbacks.push(f);
+    if (this.currentProblem) {
+      process.nextTick(() => f(this.currentProblem));
+    }
+  }
+
+  handleProblemChange() {
+    this.problemCallbacks.forEach(f =>
+      process.nextTick(() => f(this.currentProblem))
+    );
+  }
+
+  handleDatasetChange() {
+    this.datasetCallbacks.forEach(f =>
+      process.nextTick(() => f(this.currentDataset))
+    );
   }
 
   // getters and setters
@@ -62,7 +85,7 @@ class Session {
   }
   setCurrentProblem(currentProblem) {
     this.currentProblem = currentProblem;
-    // console.log("Session setProblem");
+    this.handleProblemChange();
   }
 
   getCurrentHerald() {
@@ -73,9 +96,11 @@ class Session {
   }
 
   getCurrentHeraldId() {
-    return this.herald.getId();
+    return this.currentHeraldId;
   }
-  // setCurrentHeraldId(){}
+  setCurrentHeraldId(id) {
+    this.currentHeraldId = id;
+  }
 
   getHeraldsMap() {
     return this.heraldsMap;

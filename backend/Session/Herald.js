@@ -1,8 +1,9 @@
 class Herald {
-  constructor(id) {
+  constructor(id, devSolutions = null) {
     // to be private, getters and setters
     console.log("New herald created", id);
     this.id = id; // new
+    this.devSolutions = devSolutions;
     this.dataset = null;
     this.problem = null;
     this.client = null;
@@ -15,17 +16,6 @@ class Herald {
     this.search_id = null; // {}
     this.rankVar = 20;
 
-    // legacy (legacy), for frontend
-    // this.user_problem_root = "./static/output/problems"; // string, path, "./static/output/problems"
-    // this.running_mode = "development"; // string, "development"
-    // this.model_comparison_type = "regression"; // string, "regression"
-    // this.model_output_prediction_files = [
-    //   "static/local_testing_data/196_autoMpg/196_autoMpg_solution/model_A.csv",
-    //   "static/local_testing_data/196_autoMpg/196_autoMpg_solution/model_B.csv",
-    //   "static/local_testing_data/196_autoMpg/196_autoMpg_solution/model_C.csv"
-    // ]; // []
-
-    // for dev, debug integrate with ta2 purpose
     this.isRequest = true;
     this.isResponse = true;
     this.REQUESTS_PATH = null; //""
