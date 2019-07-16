@@ -2,7 +2,13 @@ const fs = require("fs");
 
 const proto = require("../../proto.js");
 
-function getProduceSolutionResults(solution, request_id, fulfill, reject) {
+function getProduceSolutionResults(
+  herald,
+  solution,
+  request_id,
+  fulfill,
+  reject
+) {
   // console.log("get produce solution called");
   let solution_id = solution.solution_id;
   let _fulfill = fulfill;
@@ -51,7 +57,7 @@ function getProduceSolutionResults(solution, request_id, fulfill, reject) {
               solution_id +
               " has not output file; removing from results set"
           );
-          sessionVar.solutions.delete(solution_id);
+          herald.getSolutions.delete(solution_id);
         }
         // console.log("solution.fit.outputCsv", solution.fit.outputCsv);
       }

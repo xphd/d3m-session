@@ -1,0 +1,3 @@
+shared/output
+shared/*.json
+shared/*.pkl

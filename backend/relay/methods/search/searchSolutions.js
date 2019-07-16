@@ -16,7 +16,7 @@ const config = require("../../config.js");
 
 function searchSolutions(herald) {
   console.log("searchSolutions begin");
-  let datasetH = herald.getDataset();
+  let dataset = herald.getDataset();
   let problemH = herald.getProblem();
 
   let problemSchema = problemH.getProblemSchema();
@@ -25,7 +25,7 @@ function searchSolutions(herald) {
   let grpcVersion = config.grpcVersion;
   let allowed_val_types = config.allowed_val_types;
   // remove old solutions
-  // sessionVar.solutions = new Map();
+
   // let problemSchema = getProblemSchema();
 
   console.log(problemSchema.about.problemID);
@@ -94,7 +94,6 @@ function searchSolutions(herald) {
 
   problem_desc.setProblem(problem);
   var inputs = [];
-  // console.log("problem schema:", handleImageUrl(evaluationConfig.problem_schema));
   for (var i = 0; i < problemSchema.inputs.data.length; i++) {
     var targets = [];
     var next_input = new proto.ProblemInput();
@@ -117,11 +116,9 @@ function searchSolutions(herald) {
   problem_desc.setInputs(inputs);
 
   var dataset_input = new proto.Value();
-  // dataset_input.setDatasetUri(
-  //   "file://" + handleImageUrl(evaluationConfig.dataset_schema)
-  // );
+
   dataset_input.setDatasetUri(
-    "file://" + handleImageUrl(datasetH.getDatasetPath() + "/datasetDoc.json")
+    "file://" + handleImageUrl(dataset.getDatasetPath() + "/datasetDoc.json")
   );
   request.setInputs(dataset_input);
   request.setProblem(problem_desc);
@@ -150,7 +147,7 @@ function searchSolutions(herald) {
         }
 
         herald.search_id = response.search_id;
-        // setTimeout(() => getSearchSolutionsResults(sessionVar, fulfill, reject), 180000);
+        // setTimeout(() => getSearchSolutionsResults(, fulfill, reject), 180000);
         getSearchSolutionsResults(herald, fulfill, reject);
       }
     });

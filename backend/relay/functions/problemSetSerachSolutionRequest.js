@@ -1,16 +1,5 @@
 const jsonfile = require("jsonfile");
-// const appRoot = require("app-root-path");
 
-// import evaluationConfig
-// const evaluationConfig = require(appRoot + "/tufts_gt_wisc_configuration.json");
-
-// import props
-// const props = require("../props");
-
-// const proto = props.proto;
-// const userAgentTA3 = props.userAgentTA3;
-// const grpcVersion = props.grpcVersion;
-// const allowed_val_types = props.allowed_val_types;
 const proto = require("../proto.js");
 const config = require("../config.js");
 
@@ -89,8 +78,10 @@ function problemSetSerachSolutionRequest(herald, problemSet, dirPath) {
 
   var dataset_input = new proto.Value();
   // dataset_input.setDatasetUri(handleImageUrl(evaluationConfig.dataset_schema));
+
+  let dataset = herald.getDataset();
   dataset_input.setDatasetUri(
-    handleImageUrl(herald.getDataset().getDatasetSchema())
+    handleImageUrl(dataset.getDatasetPath() + "/datasetDoc.json")
   );
 
   request.setInputs(dataset_input);

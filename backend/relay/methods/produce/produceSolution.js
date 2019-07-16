@@ -1,6 +1,4 @@
 const fs = require("fs");
-const appRoot = require("app-root-path");
-// const evaluationConfig = require(appRoot + "/tufts_gt_wisc_configuration.json");
 
 const proto = require("../../proto.js");
 
@@ -10,21 +8,19 @@ const handleImageUrl = require("../../functions/handleImageUrl.js");
 const getProduceSolutionResults = require("./getProduceSolutionResults.js");
 
 function produceSolution(herald, solution) {
-  let datasetH = herald.getDataset();
   let solution_id = solution.solution_id;
   // console.log("produce solution called");
   let request = new proto.ProduceSolutionRequest();
   request.setFittedSolutionId(solution.fit.fit_id);
   let dataset_input = new proto.Value();
-  // dataset_input.setDatasetUri(
-  //   "file://" + handleImageUrl(evaluationConfig.dataset_schema)
-  // );
+
+  let dataset = herald.getDataset();
   dataset_input.setDatasetUri(
-    "file://" + handleImageUrl(datasetH.getDatasetPath() + "/datasetDoc.json")
+    "file://" + handleImageUrl(dataset.getDatasetPath() + "/datasetDoc.json")
   );
   request.setInputs(dataset_input);
   /*
-      if (sessionVar.ta2Ident.user_agent === "cmu_ta2") {
+      if (.ta2Ident.user_agent === "cmu_ta2") {
         produceSolutionRequest.setExposeOutputs("");
       }*/
   request.setExposeOutputs(solution.finalOutput);
@@ -48,7 +44,13 @@ function produceSolution(herald, solution) {
         reject(err);
       } else {
         let request_id = response.request_id;
-        getProduceSolutionResults(solution, request_id, fulfill, reject);
+        getProduceSolutionResults(
+          herald,
+          solution,
+          request_id,
+          fulfill,
+          reject
+        );
 
         // Added by Alex, for the purpose of Pipeline Visulization
         if (herald.isResponse) {

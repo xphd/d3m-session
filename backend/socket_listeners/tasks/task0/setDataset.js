@@ -13,23 +13,16 @@ function setDataset(session, datasetSelected) {
     if (datasetPath == currentDatasetPath) {
       // do nothing ?
     } else {
-      let dataset = new Dataset(datasetPath, datasetSelected);
+      let dataset = new Dataset(
+        datasetsPath + datasetSelected,
+        datasetSelected
+      );
       session.setCurrentDataset(dataset);
     }
   } else {
-    let dataset = new Dataset(datasetPath, datasetSelected);
+    let dataset = new Dataset(datasetsPath + datasetSelected, datasetSelected);
     session.setCurrentDataset(dataset);
   }
-
-  // if (datasetPath == currentDatasetPath) {
-  //   // do nothing ?
-  // } else {
-  //   let dataset = new Dataset(datasetPath);
-  //   session.setCurrentDataset(dataset);
-  // }
-
-  // let herald = session.getCurrentHerald();
-  // herald.setDataset(dataset);
 }
 
 module.exports = setDataset;
