@@ -3,7 +3,7 @@ const appRootPath = require("app-root-path");
 const Dataset = require(appRootPath + "/Session/Dataset.js");
 
 const datasetsPath = appRootPath + "/static/local_testing_data/";
-
+// const datasetsPath = "/home/cong/datasets/seed_datasets_current/";
 function setDataset(session, datasetSelected) {
   let datasetPath =
     datasetsPath + datasetSelected + "/" + datasetSelected + "_dataset";

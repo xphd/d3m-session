@@ -24,6 +24,7 @@ function searchSolutions(herald) {
   let userAgentTA3 = config.userAgentTA3;
   let grpcVersion = config.grpcVersion;
   let allowed_val_types = config.allowed_val_types;
+  let rank_solutions_limit = 5;
   // remove old solutions
 
   // let problemSchema = getProblemSchema();
@@ -34,18 +35,24 @@ function searchSolutions(herald) {
   request.setUserAgent(userAgentTA3);
   request.setVersion(grpcVersion);
 
-  let timeBound = 0;
-  let msg = "";
-  if (herald.ta2Ident.user_agent.startsWith("nyu_ta2")) {
-    timeBound = 10;
-    msg = "nyu ta2 detected; timeBound for searching to " + timeBound;
-  } else {
-    timeBound = 2;
-    msg = "non-nyu ta2 detected; timeBound for searching to " + timeBound;
-  }
-  console.log(msg);
+  let timeBound = 10;
+  // let msg = "";
+  // if (herald.ta2Ident.user_agent.startsWith("nyu_ta2")) {
+  //   timeBound = 10;
+  //   msg = "nyu ta2 detected; timeBound for searching to " + timeBound;
+  // } else {
+  //   timeBound = 6;
+  //   msg = "non-nyu ta2 detected; timeBound for searching to " + timeBound;
+  // }
+  // console.log(msg);
+
+  // if (herald.ta2Ident.user_agent.startsWith("ISI")) {
+  //   timeBound = 15;
+  //   msg = "ISI ta2 detected; timeBound for searching to " + timeBound + "minutes";
+  // }
   request.setTimeBoundSearch(timeBound);
   request.setAllowedValueTypes(allowed_val_types);
+  request.setRankSolutionsLimit(rank_solutions_limit);
 
   var problem_desc = new proto.ProblemDescription();
   var problem = new proto.Problem();

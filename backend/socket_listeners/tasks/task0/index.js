@@ -7,7 +7,8 @@ const setDataset = require("./setDataset.js");
 
 function task0_set(session, socket) {
   socket.on("getAllDatasetNamesRequest", () => {
-    const allDatasetsPath = appRootPath + "/static/local_testing_data/";
+    let allDatasetsPath = appRootPath + "/static/local_testing_data/";
+    // let allDatasetsPath = "/home/cong/datasets/seed_datasets_current/";
     let allDatasetNames = getAllDatasetNames(allDatasetsPath);
     socket.emit("getAllDatasetNamesResponse", allDatasetNames);
   });
