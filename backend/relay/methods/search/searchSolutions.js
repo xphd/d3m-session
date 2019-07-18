@@ -1,4 +1,8 @@
 const fs = require("fs");
+
+const appRootPath = require("app-root-path");
+const translate = require(appRootPath + "/relay/functions/translate.js");
+
 const getSearchSolutionsResults = require("./getSearchSolutionsResults.js");
 
 // import functions
@@ -19,15 +23,16 @@ function searchSolutions(herald) {
   let dataset = herald.getDataset();
   let problemH = herald.getProblem();
 
-  let problemSchema = problemH.getProblemSchema();
+  let problemSchema = translate(problemH.getProblemSchema());
+  if (!problemSchema.about) {
+    console.log(problemSchema);
+  }
 
   let userAgentTA3 = config.userAgentTA3;
   let grpcVersion = config.grpcVersion;
   let allowed_val_types = config.allowed_val_types;
   let rank_solutions_limit = 5;
   // remove old solutions
-
-  // let problemSchema = getProblemSchema();
 
   console.log(problemSchema.about.problemID);
 
