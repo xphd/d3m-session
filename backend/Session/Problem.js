@@ -1,27 +1,32 @@
 class Problem {
   constructor(source) {
-    if (typeof source === "string") {
+    if (typeof(source)==="string") {
       let problemPath = source;
       this.problemPath = problemPath;
       if (this.problemPath.endsWith("/problemDoc.json")) {
-        this.problemPath = this.problemPath.substring(
-          0,
-          this.problemPath.length - 16
-        );
+        this.problemPath = this.problemPath.substring(0, this.problemPath.length - 16);
       }
       console.log("Create problem from:", this.problemPath);
       this.problemSchema = require(this.problemPath + "/problemDoc.json");
-    } else if (typeof source === "object") {
+    } else if (typeof(source)==="object") {
       console.log("loading problem from memory");
       this.problemPath = null;
       this.problemSchema = source;
     }
+    console.log(this.getProblemSchema());
   }
   getProblemPath() {
     return this.problemPath;
   }
   getProblemSchema() {
     return this.problemSchema;
+  }
+  getId() {
+    if (this.getProblemSchema() && this.getProblemSchema().problemID) {
+      return this.getProblemSchema().problemID;
+    } else {
+      return "PROBLEM ID::" + this.getProblemPath();
+    }
   }
 }
 module.exports = Problem;
